@@ -28,11 +28,15 @@ jobs:
         # Use only 'javascript' to analyze code written in JavaScript, TypeScript or both
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
-    container: typesense/typesense-development
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+
+    - name: Install Snappy
+      run: |
+        wget https://launchpad.net/ubuntu/+archive/primary/+files/snappy_1.1.3.orig.tar.gz -O /opt/snappy_1.1.3.orig.tar.gz
+        tar -C /opt -xf /opt/snappy_1.1.3.orig.tar.gz
+        mkdir -p /opt/snappy-1.1.3/build && cd /opt/snappy-1.1.3/build && ../configure && make -j8 && make install
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
