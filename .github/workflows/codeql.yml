@@ -34,7 +34,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update -y
-        sudo apt install -y snappy curl
+        sudo apt install -y curl
 
     - name: Install Snappy
       run: |
