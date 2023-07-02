@@ -28,6 +28,8 @@ jobs:
         # Use only 'javascript' to analyze code written in JavaScript, TypeScript or both
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
+    container: typesense/typesense-development
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
