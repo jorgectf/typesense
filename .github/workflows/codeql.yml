@@ -31,19 +31,16 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Install dependencies
+      run: |
+        sudo apt update -y
+        sudo apt install -y snappy curl
+
     - name: Install Snappy
       run: |
         wget https://launchpad.net/ubuntu/+archive/primary/+files/snappy_1.1.3.orig.tar.gz -O /opt/snappy_1.1.3.orig.tar.gz
         tar -C /opt -xf /opt/snappy_1.1.3.orig.tar.gz
         mkdir -p /opt/snappy-1.1.3/build && cd /opt/snappy-1.1.3/build && ../configure && make -j8 && sudo make install
-
-    - name: Install CURL
-      run: |
-        wget https://github.com/curl/curl/releases/download/curl-7_78_0/curl-7.78.0.tar.gz -O /opt/curl-7.78.0.tar.gz
-        tar -C /opt -xf /opt/curl-7.78.0.tar.gz
-        cd /opt/curl-7.78.0 && LIBS="-ldl -lpthread" ./configure --disable-shared --with-ssl=/usr/local \
-        --without-ca-bundle --without-libssh2 --without-gssapi --disable-ldap --without-libidn2 --without-librtmp \
-        --without-zstd --without-ca-path && make -j8 && sudo make install && rm -rf /usr/local/lib/*.so*
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
